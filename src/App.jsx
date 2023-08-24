@@ -4,8 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/user/Home'
-import TopBar from './Pages/user/TopBar'
-import Footer from './Pages/user/Footer'
+import TopBar from './compenents/TopBar'
+import Footer from './compenents/Footer'
 
 function App() {
   const [count, setCount] = useState(0)

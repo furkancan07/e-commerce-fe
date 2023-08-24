@@ -29,6 +29,12 @@ export const getCategoryProduct=async(category) => {
     var res=await axios.get(url+"getCategoryProducts/"+category);
     return res;
 }
+// aranan ürünü getirme 
+export const getSearchProducts = async (value) => {
+    var res = await axios.get(url + "getSearchProduct/" +value);
+    return res;
+    
+}
 
 
 
