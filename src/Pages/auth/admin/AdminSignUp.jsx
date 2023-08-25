@@ -31,7 +31,7 @@ const AdminSignUp = () => {
     dispatch(aLogin(creds));
   };
 
-  // Bu etkileşim, disabled durumunun 2 saniye sonra tekrar false olarak ayarlanmasını sağlar.
+ 
   useEffect(() => {
     if (isLogin === true) {
       navigate('/admin-panel');
@@ -40,7 +40,7 @@ const AdminSignUp = () => {
         setDisabled(false);
       }, 1000);
 
-      // Temizlik amaçlı: bileşen ayrıldığında zamanlayıcıyı temizle.
+      
       return () => clearTimeout(timeout);
     }
   }, [isLogin,disabled]);
