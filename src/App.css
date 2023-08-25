@@ -20,3 +20,46 @@
     display: flex;
     justify-content: space-around;
 }
+.link{
+    text-decoration: none;
+    color: black;
+}
+.login-form{
+    margin-top: 10%;
+    text-align: center;
+
+}
+.inputDiv{
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.login-input{
+    padding: 12px;
+    width: 80%;
+}
+.login-button{
+    background-color: black;
+}
+#login-button{
+    background-color: black;
+}
+.link-div{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+}
+.link-login{
+color: black;
+text-decoration: none;
+}
+.link-create{
+    text-decoration: none;
+    color: white;
+}
+.invalid-feedback{
+        color: red;
+        margin-bottom: 5px;
+        text-align: left;
+        margin-left: 10%;
+}
+

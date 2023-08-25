@@ -47,7 +47,6 @@ export const productReducer = createSlice({
       })
       .addCase(getCategoryProductList.fulfilled, (state, action) => {
         state.status = "succeeded";
-       
         state.productList = action.payload;
       })
       .addCase(getCategoryProductList.rejected, (state) => {

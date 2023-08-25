@@ -10,7 +10,7 @@ const Home = () => {
 const [category, setCategory] = useState("Teknoloji")
   
   
-  const a = [];
+  
   const dispatch = useDispatch();
 
   const changeCategory = (event) => {

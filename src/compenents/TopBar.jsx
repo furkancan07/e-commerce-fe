@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch } from 'react-redux';
 import { getSearchProductList } from '../redux/Reducer/Product/ProductReducer';
+import { Link } from 'react-router-dom';
 
 
 
@@ -35,20 +36,24 @@ const TopBar = () => {
     }}>
       <AppBar position='static'>
         <Toolbar className='toolbar'>
-          <h1>Rf</h1>
+          <Link className='link' to="/"><h1>Rf</h1></Link>
+          
           <TextField onChange={searchProduct}  id="filled-basic" label="Ara" variant="filled" /> 
           <div className='buttons-topbar'>
             <Button id="button-topbar" startIcon={<AccountCircleIcon></AccountCircleIcon>}
-            variant="contained">
-             Giriş Yap
+              variant="contained">
+              <Link className='link' to="/login"> Giriş Yap </Link>
+           
           </Button>
            <Button id="button-topbar" startIcon={<FavoriteIcon color='error'></FavoriteIcon>}
-            variant="contained">
-             Beğeniler
+              variant="contained">
+              <Link className='link' to="/likes">Beğeniler </Link>
+             
           </Button>
            <Button id="button-topbar" startIcon={<ShoppingCartIcon ></ShoppingCartIcon>}
-            variant="text">
-             Sepet
+              variant="text">
+              <Link className='link' to="/orders"> Sepet </Link>
+            
           </Button>
 
           </div>

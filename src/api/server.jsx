@@ -141,6 +141,20 @@ export const updateOrderStatus = async (orderId,body) => {
 //* admin işlemleri
 // admin kayıt
 // admin giriş
+export const adminLogin = async (creds) => {
+  
+  const encodedCredentials = btoa(creds.username + ':' + creds.password);
+  const headers = {
+    'Authorization': 'Basic ' + encodedCredentials
+  };
+
+  try {
+    const response = await axios.post(url+'adminLogin', {}, { headers });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 
 
