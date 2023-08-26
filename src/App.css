@@ -62,4 +62,28 @@ text-decoration: none;
         text-align: left;
         margin-left: 10%;
 }
+#form-container{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+    
+}
+#title{
+text-align: center;
+}
+label{
+    margin-bottom:1%;
+    margin-top: 1%;
+}
+.product-form{
+        border: solid white;
+            border-radius: 12px;
+            margin: 0% 5%;
+            padding: 20px;
+}
+#product-button{
+    background-color: black;
+    color: white;
+    margin: 1% 40%;
+}
 

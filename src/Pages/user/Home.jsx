@@ -39,7 +39,9 @@ const [category, setCategory] = useState("Teknoloji")
      
       {
         productList.map((product, index) => {
-          return <div key={index}>{product.title}</div>
+          return <div key={index}>
+            <img src={product.image} alt="" />
+          </div>
         })
       }
     </div>

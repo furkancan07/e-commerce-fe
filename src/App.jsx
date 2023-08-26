@@ -13,6 +13,9 @@ import AdminSignUp from './Pages/auth/admin/AdminSignUp'
 import CreateUser from './Pages/auth/user/createUser'
 import { Provider } from 'react-redux'
 import AdminPanel from './Pages/admin/adminPanel'
+import ProductAdd from './Pages/admin/ProductAdd'
+import AdminProductPage from './Pages/admin/AdminProductPage'
+import AdminProfilPage from './Pages/admin/AdminProfilPage'
 
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
         <Route path='/admin-login' element={<AdminSignUp></AdminSignUp>}></Route>
         <Route path='/createuser' element={<CreateUser></CreateUser>}></Route>
         <Route path='/admin-panel' element={<AdminPanel></AdminPanel>} ></Route>
+        <Route path='/productAdd' element={<ProductAdd></ProductAdd>} ></Route>
+        <Route path='/adminProducts' element={<AdminProductPage></AdminProductPage>} ></Route>
+        <Route path='/admin-profil' element={<AdminProfilPage></AdminProfilPage>} ></Route>
       </Routes>
       
     

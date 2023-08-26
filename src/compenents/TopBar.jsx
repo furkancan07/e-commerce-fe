@@ -5,9 +5,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSearchProductList } from '../redux/Reducer/Product/ProductReducer';
 import { Link } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 
 
@@ -27,10 +29,46 @@ const TopBar = () => {
         dispatch(getSearchProductList(value))
      }
   
-  },[value])
+  }, [value])
+  // admin girişi
+  const { username,isLogin } = useSelector((store) => store.admin);
   
   return (
-    <Box sx={{
+    <>
+      { isLogin ? <Box sx={{
+      backgroundColor: 'green',
+      flexGrow: 1
+    }}>
+      <AppBar position='static'>
+        <Toolbar className='toolbar'>
+            <Link className='link' to="/"><h1>Admin Panel</h1></Link>
+          
+          <TextField onChange={searchProduct}  id="filled-basic" label="Ara" variant="filled" /> 
+          <div className='buttons-topbar'>
+            <Button id="button-topbar" startIcon={<AccountCircleIcon></AccountCircleIcon>}
+              >
+              <Link className='link' to="/admin-profil"> {username} </Link>
+           
+              </Button>
+                 <Button id="button-topbar" startIcon={<AddIcon ></AddIcon>}
+              variant="text">
+              <Link className='link' to="/productAdd"> Ürün Ekle </Link>
+            
+          </Button>
+           
+           <Button id="button-topbar" startIcon={<AttachMoneyIcon ></AttachMoneyIcon>}
+              variant="text">
+              <Link className='link' to="/adminProducts"> Ürünlerim </Link>
+            
+          </Button>
+
+          </div>
+           
+          
+         
+        </Toolbar>
+      </AppBar>
+    </Box> :   <Box sx={{
       backgroundColor: 'green',
       flexGrow: 1
     }}>
@@ -62,7 +100,10 @@ const TopBar = () => {
          
         </Toolbar>
       </AppBar>
-    </Box>
+    </Box>}
+    </>
+    
+  
   )
 }
 

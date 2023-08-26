@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { adminLogin } from "../../../api/server";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { adminLogin, createProduct } from "../../../api/server";
+
 
 
 
@@ -21,6 +20,8 @@ const initialState = {
 }
 
 
+
+// giriş
 export const aLogin = createAsyncThunk(
     "admin/aLogin",
     async (creds) => {
@@ -36,6 +37,7 @@ export const aLogin = createAsyncThunk(
     }
 )
 
+
 export const adminReducer = createSlice({
     name: "admin",
     initialState,
@@ -46,6 +48,9 @@ export const adminReducer = createSlice({
                 password : null,
                 }
                 
+        },
+        logout: (state) => {
+            state.isLogin = false;
         }
     },
     extraReducers: (builder) => {
@@ -68,5 +73,5 @@ export const adminReducer = createSlice({
        
     }
 });
-export const { clearError } = adminReducer.actions; 
+export const { clearError,logout } = adminReducer.actions; 
 export default adminReducer.reducer;

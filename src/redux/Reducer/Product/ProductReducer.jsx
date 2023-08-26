@@ -1,10 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCategoryProduct, getSearchProducts } from "../../../api/server";
+import { createProduct, getCategoryProduct, getSearchProducts } from "../../../api/server";
 
 const initialState = {
   productList: [],
-  searchProduct: [],
-   status: "idle", 
+  error: {
+    validationErrors: {
+title: null,
+    description: null,
+    categoryName : null,
+    },
+    
+  },
+  status: "idle", 
 };
 
 export const getCategoryProductList = createAsyncThunk(
@@ -21,6 +28,25 @@ export const getCategoryProductList = createAsyncThunk(
     
   }
 );
+// ürün ekleme
+export const addProduct = createAsyncThunk(
+    "admin/addProduct",
+    async ({username,body}) => {
+        var response;
+        await createProduct(username, body).
+            then((res) => {
+              response = res.data;
+              console.log(username);
+             })
+            .catch((err) => {
+              response = err.response.data;
+              
+        })
+        return response;
+    }
+)
+// ürün güncelleme
+// ürün silme
 export const getSearchProductList = createAsyncThunk(
   "product/searchProduct",
   
@@ -39,7 +65,18 @@ export const getSearchProductList = createAsyncThunk(
 export const productReducer = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error={
+    validationErrors: {
+title: null,
+    description: null,
+    categoryName : null,
+    },
+    
+  }
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCategoryProductList.pending, (state) => {
@@ -62,8 +99,21 @@ export const productReducer = createSlice({
       .addCase(getSearchProductList.rejected, (state) => {
         state.status = "failed";
       })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.error = action.payload;
+        console.log(state.error)
+        if (action.payload === 200) {
+          state.status = 200;
+        } else {
+          state.status = "error";
+        }
+        console.log(state.status);
+        
+        
+    })
 
   },
 });
+export const { clearError } = productReducer.actions;
 
 export default productReducer.reducer;
