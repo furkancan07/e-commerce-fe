@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategoryProductList } from '../../redux/Reducer/Product/ProductReducer'
 import { Box, Button, Toolbar } from '@mui/material'
+import ProductsPage from '../../compenents/ProductsPage'
 
 
 const Home = () => {
@@ -34,16 +35,14 @@ const [category, setCategory] = useState("Teknoloji")
         <Button onClick={changeCategory} name='Cocuk' variant='text'>Çocuk</Button>
         <Button onClick={changeCategory} name='Market' variant='text'>SuperMarket</Button>
       </div>
-      
-        
-     
-      {
+      <div id='products'>
+        {
         productList.map((product, index) => {
-          return <div key={index}>
-            <img src={product.image} alt="" />
-          </div>
+          return <ProductsPage key={index} product={product}></ProductsPage>
         })
       }
+      </div>
+      
     </div>
   )
 }

@@ -86,4 +86,28 @@ label{
     color: white;
     margin: 1% 40%;
 }
+#products{
+   display: flex;
+   flex-wrap: wrap;
+   margin: 1%;
+   
+}
+#product-card {
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    margin-left: 50px;  
+}
+#action{
+    display: flex;
+    justify-content: space-around;
+}
+#price{
+background-color: darkgray;
+color: white;
+border-radius: 20px;
+margin-left: 6%;
+text-align: center;
+width: 80%;
+}
+
 

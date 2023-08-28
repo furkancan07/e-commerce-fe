@@ -16,6 +16,7 @@ import AdminPanel from './Pages/admin/adminPanel'
 import ProductAdd from './Pages/admin/ProductAdd'
 import AdminProductPage from './Pages/admin/AdminProductPage'
 import AdminProfilPage from './Pages/admin/AdminProfilPage'
+import ProductDetailPage from './Pages/user/ProductDetailPage'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path='/productAdd' element={<ProductAdd></ProductAdd>} ></Route>
         <Route path='/adminProducts' element={<AdminProductPage></AdminProductPage>} ></Route>
         <Route path='/admin-profil' element={<AdminProfilPage></AdminProfilPage>} ></Route>
+        <Route path="/product/:id" element={<ProductDetailPage/>} /> 
       </Routes>
       
     

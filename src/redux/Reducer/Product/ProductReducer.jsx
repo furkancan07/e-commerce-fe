@@ -47,13 +47,14 @@ export const addProduct = createAsyncThunk(
 )
 // ürün güncelleme
 // ürün silme
+// ürün arama 
+
 export const getSearchProductList = createAsyncThunk(
   "product/searchProduct",
   
   async (value) => {
     try {
-      const response = await getSearchProducts(value);
-      
+      const response = await getSearchProducts(value);0
       return response.data;
     }
     catch (err) {

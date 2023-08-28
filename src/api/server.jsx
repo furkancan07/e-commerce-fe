@@ -35,6 +35,11 @@ export const getSearchProducts = async (value) => {
     return res;
     
 }
+// idye göre ürün getirme
+export const getProduct = async (id) => {
+    var res = await axios.get(url + "getProduct/" + id);
+    return res;
+}
 
 
 
