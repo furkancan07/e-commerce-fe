@@ -10,6 +10,8 @@ import { getSearchProductList } from '../redux/Reducer/Product/ProductReducer';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from '../redux/Reducer/User/UserReducer';
 
 
 
@@ -24,6 +26,9 @@ const TopBar = () => {
     setValue(val);
     
   }
+  const logoutUser = () => {
+    dispatch(logout());
+  }
   useEffect(() => {
     if (value!="") {
         dispatch(getSearchProductList(value))
@@ -31,7 +36,8 @@ const TopBar = () => {
   
   }, [value])
   // admin girişi
-  const { username,isLogin } = useSelector((store) => store.admin);
+  const { username, isLogin } = useSelector((store) => store.admin);
+  const { email,userIsLogin } = useSelector((store) => store.user);
   
   return (
     <>
@@ -68,7 +74,43 @@ const TopBar = () => {
          
         </Toolbar>
       </AppBar>
-    </Box> :   <Box sx={{
+    </Box> : userIsLogin ?  <Box sx={{
+      backgroundColor: 'green',
+      flexGrow: 1
+    }}>
+      <AppBar position='static'>
+        <Toolbar className='toolbar'>
+          <Link className='link' to="/"><h1>Rf</h1></Link>
+          
+          <TextField onChange={searchProduct}  id="filled-basic" label="Ara" variant="filled" /> 
+          <div className='buttons-topbar'>
+            <Button id="button-topbar" startIcon={<AccountCircleIcon></AccountCircleIcon>}
+              variant="contained">
+              <Link className='link' to={`/user/${email}`}> {email.split("@")[0]} </Link>
+          </Button>
+           <Button id="button-topbar" startIcon={<FavoriteIcon color='error'></FavoriteIcon>}
+              variant="contained">
+              <Link className='link' to="/likes">Beğeniler </Link>
+             
+          </Button>
+           <Button id="button-topbar" startIcon={<ShoppingCartIcon ></ShoppingCartIcon>}
+              variant="text">
+              <Link className='link' to="/orders"> Sepet </Link>
+            
+                </Button>
+                <Button onClick={logoutUser} id="button-topbar" startIcon={<LogoutIcon></LogoutIcon>}
+              variant="text">
+              <Link className='link'> Çıkış Yap </Link>
+            
+          </Button>
+
+          </div>
+           
+          
+         
+        </Toolbar>
+      </AppBar>
+    </Box> : <Box sx={{
       backgroundColor: 'green',
       flexGrow: 1
     }}>

@@ -23,7 +23,11 @@ const [category, setCategory] = useState("Teknoloji")
   useEffect(() => {
     dispatch(getCategoryProductList(category))
     console.log(category);
-  },[category])
+  }, [category])
+  useEffect(() => {
+    dispatch(getCategoryProductList(category))
+    
+  }, [])
   return (
 
     <div>

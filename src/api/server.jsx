@@ -165,8 +165,31 @@ export const adminLogin = async (creds) => {
 
 //* user işlemleri
 // user kayıt
+export const createUser = async (body) => {
+    var res = await axios.post(url + "createUser", body);
+    return res;
+}
 // user giriş
+export const userLogin = async (creds) => {
+  
+  const encodedCredentials = btoa(creds.email + ':' + creds.password);
+  const headers = {
+    'Authorization': 'Basic ' + encodedCredentials
+  };
+
+  try {
+    const response = await axios.post(url+'userLogin', {}, { headers });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 // user şifremi unuttum
+export const forgotPassword = async (body) => {
+    var res = await axios.post(url + "forgot", body);
+    return res;
+}
+
 
 
 

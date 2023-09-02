@@ -1,20 +1,64 @@
 import { TextField ,Button} from '@mui/material'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginUser } from '../../../redux/Reducer/User/UserReducer'
 
 const Login = () => {
+  const { error, username, email, userIsLogin } = useSelector((store) => store.user);
+  const [disabled, setDisabled] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [body, setBody] = useState({
+    email: null,
+    password : null,
+  })
+  const inputChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setBody({ ...body, [name]: value });
+  }
+  const login = () => {
+    setDisabled(true);
+    const creds = {
+      email: body.email,
+      password: body.password,
+    }
+    dispatch(loginUser(creds));
+    
+  }
+  useEffect(() => {
+    if (userIsLogin === true) {
+      navigate("/");
+    }
+    else {
+      const timeout = setTimeout(() => {
+        setDisabled(false);
+      }, 1000);
+      return () => clearTimeout(timeout);
+      
+    }
+},[userIsLogin,disabled])
   return (
     <div>
         
           <form className='login-form'>
                 <h1>Giriş Yap</h1>
               <div className='inputDiv'>
-                  <TextField className='login-input' placeholder='Email Adresi*' name='email'></TextField>
-              </div>
+                  <TextField onChange={inputChange} className='login-input' placeholder='Email Adresi*' name='email'></TextField>
+        </div>
+        <div className="invalid-feedback">
+          {error?.validationErrors?.email}
+        </div>
               <div className='inputDiv'>
-                  <TextField type='password' className='login-input' placeholder='Şifre*' name='şifre'></TextField>
-              </div>
-              <Button id='login-button' size='large' variant='contained'>Giriş</Button>
+                  <TextField onChange={inputChange} type='password' className='login-input' placeholder='Şifre*' name='password'></TextField>
+        </div>
+         <div className="invalid-feedback">
+          {error?.validationErrors?.password}
+        </div>
+        {disabled ? <Button  disabled id='login-button' size='large' variant='contained'>Yükleniyor...</Button>
+          : <Button  onClick={login} id='login-button' size='large' variant='contained'>Giriş</Button>}
+              
               <div className='link-div'>
                   <Link to="/createuser" className='link-login'>Kayıt Ol</Link>
                   <Link to="/admin-login" className='link-login'>Mağaza Girişi</Link>

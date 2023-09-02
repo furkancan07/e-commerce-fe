@@ -21,14 +21,15 @@ const ProductsPage = ({ product }) => {
 }
     return (
       <div id='products'>
-        <Button onClick={sendDetailPage}>
+        
  <Card id='product-card'>
                 <CardHeader
                     avatar={<Avatar>{admin.username.charAt(0)}</Avatar>}
                     title={admin.username}
                 />
-
-                {image && image.includes('image') ?
+          <Button onClick={sendDetailPage}>
+          {image && image.includes('image') ?
+           
                     <CardMedia
                         component="img"
                         height={220}
@@ -41,13 +42,16 @@ const ProductsPage = ({ product }) => {
                         <video height={217} width='100%' controls>
                             <source src={image} type="video/mp4" />
                         </video> : null
-                }
+                }  
+</Button>
+          
                 <CardContent>
                     <Typography variant='h5'>{title}</Typography>
-                    <br />
-                    <Typography variant='h6'>
-                        {trimmedDescription}
-                    </Typography>
+            <br />
+            <Typography variant='h6'>
+{trimmedDescription}
+            </Typography>
+            
                     <br />
                     <Typography id='price' variant='body1'>{price} TL</Typography>
                 </CardContent>
@@ -72,7 +76,7 @@ const ProductsPage = ({ product }) => {
                     </div>
                 </CardActions>
             </Card>
-        </Button>
+        
            
         </div>
     )

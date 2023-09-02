@@ -11,6 +11,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  
   const [product, setProduct] = useState({});
   const { title, description, admin, image, category, price } = product;
   
@@ -30,7 +31,7 @@ const ProductDetailPage = () => {
   },[])
   return (
     <div>
-      {
+         {
         product !=null ?   <Card >
                 <CardHeader
             avatar={<Avatar>{admin?.username.charAt(0)}</Avatar>}
@@ -55,9 +56,12 @@ const ProductDetailPage = () => {
           <Typography variant='h5'>{title}</Typography>
           <Typography variant='body2'>{category?.name}</Typography>
                     <br />
-                    <Typography variant='h6'>
-                        {description}
-                    </Typography>
+           
+            <pre>
+              <Typography variant='h6'>{description}</Typography>
+              </pre>
+                       
+                    
                     <br />
                     <Typography id='price' variant='body1'>{price} TL</Typography>
                 </CardContent>
@@ -83,6 +87,7 @@ const ProductDetailPage = () => {
                 </CardActions>
             </Card> : <></>
       }
+    
     
         
     </div>
