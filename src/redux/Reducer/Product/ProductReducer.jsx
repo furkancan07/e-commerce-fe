@@ -47,8 +47,6 @@ export const addProduct = createAsyncThunk(
 )
 // ürün güncelleme
 // ürün silme
-
-
 // ürün arama 
 
 export const getSearchProductList = createAsyncThunk(

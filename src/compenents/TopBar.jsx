@@ -19,6 +19,11 @@ import { logout } from '../redux/Reducer/User/UserReducer';
 
 const TopBar = () => {
   const [value, setValue] = useState();
+  const { username, isLogin } = useSelector((store) => store.admin);
+  const { userIsLogin: userlog, email: eposta } = useSelector((store) => store.user);
+  const userIsLogin = localStorage.getItem("userIsLogin");
+  const email = localStorage.getItem("email");
+  console.log(userIsLogin + " " + email);
   const dispatch = useDispatch();
   const searchProduct=(event) => {
     event.preventDefault();
@@ -27,21 +32,25 @@ const TopBar = () => {
     
   }
   const logoutUser = () => {
-    dispatch(logout());
+    dispatch(logout()); 
   }
   useEffect(() => {
     if (value!="") {
         dispatch(getSearchProductList(value))
      }
   
-  }, [value])
+  }, [value,userlog])
   // admin girişi
-  const { username, isLogin } = useSelector((store) => store.admin);
-  const { email,userIsLogin } = useSelector((store) => store.user);
+  
+ 
+
   
   return (
     <>
-      { isLogin ? <Box sx={{
+      
+      {
+      // admin giriş yapmışsa
+        isLogin ? <Box sx={{
       backgroundColor: 'green',
       flexGrow: 1
     }}>
@@ -49,7 +58,7 @@ const TopBar = () => {
         <Toolbar className='toolbar'>
             <Link className='link' to="/"><h1>Admin Panel</h1></Link>
           
-          <TextField onChange={searchProduct}  id="filled-basic" label="Ara" variant="filled" /> 
+          <TextField onChange={searchProduct}  id="filled-basic" label="Ara" variant="filled" />
           <div className='buttons-topbar'>
             <Button id="button-topbar" startIcon={<AccountCircleIcon></AccountCircleIcon>}
               >
@@ -74,7 +83,8 @@ const TopBar = () => {
          
         </Toolbar>
       </AppBar>
-    </Box> : userIsLogin ?  <Box sx={{
+        </Box> : // Kullanici giriş yapmışsa
+          userIsLogin ? <Box sx={{
       backgroundColor: 'green',
       flexGrow: 1
     }}>
@@ -93,7 +103,7 @@ const TopBar = () => {
               <Link className='link' to="/likes">Beğeniler </Link>
              
           </Button>
-           <Button id="button-topbar" startIcon={<ShoppingCartIcon ></ShoppingCartIcon>}
+           <Button  id="button-topbar" startIcon={<ShoppingCartIcon ></ShoppingCartIcon>}
               variant="text">
               <Link className='link' to="/orders"> Sepet </Link>
             
@@ -130,16 +140,13 @@ const TopBar = () => {
               <Link className='link' to="/likes">Beğeniler </Link>
              
           </Button>
-           <Button id="button-topbar" startIcon={<ShoppingCartIcon ></ShoppingCartIcon>}
+           <Button  id="button-topbar" startIcon={<ShoppingCartIcon ></ShoppingCartIcon>}
               variant="text">
               <Link className='link' to="/orders"> Sepet </Link>
             
           </Button>
 
           </div>
-           
-          
-         
         </Toolbar>
       </AppBar>
     </Box>}

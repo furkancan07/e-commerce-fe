@@ -1,13 +1,16 @@
+
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import Login from '../auth/user/Login';
+
+
 
 const UserProfilPage = () => {
-    const { userIsLogin } = useSelector((store) => store.user);
+    const userIsLogin = localStorage.getItem("userIsLogin");
+    console.log(userIsLogin);
   return (
       <div>
           {
-              userIsLogin ? <div> user profil</div> : <Link to="/login">Bu Sayfaya Erişme Yetkiniz Yok</Link>
+              userIsLogin=="true" ? <div> user profil</div> :<Login></Login>
           }
      
     </div>

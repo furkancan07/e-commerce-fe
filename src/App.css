@@ -109,5 +109,13 @@ margin-left: 6%;
 text-align: center;
 width: 80%;
 }
+.orderDiv{
+    display: flex;
+        justify-content: space-around;
+}
+.paymentDiv{
+    margin-top: 5%;
+}
+
 
 

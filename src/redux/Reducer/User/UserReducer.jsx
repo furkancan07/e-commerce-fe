@@ -44,6 +44,7 @@ export const userReducer = createSlice({
     reducers: {
         logout: (state) => {
             state.userIsLogin = false;
+            localStorage.removeItem("userIsLogin");
       }  
     },
     extraReducers: (builder) => {
@@ -52,7 +53,10 @@ export const userReducer = createSlice({
             state.error = action.payload;
             console.log(state.error);
             if (state.error?.status == 200) {
+                localStorage.setItem("userIsLogin", "true");
+                localStorage.setItem("email", state.email);
                 state.userIsLogin = true;
+                
             } else {
                 state.userIsLogin = false;
             }

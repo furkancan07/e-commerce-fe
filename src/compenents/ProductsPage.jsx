@@ -1,22 +1,28 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material';
+import { Alert, Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {Button} from '@mui/material'
 import { useBeforeUnload, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/Reducer/Product/CartReducer';
 
 const ProductsPage = ({ product }) => {
     const { id, admin, title, image, description, price } = product;
-  const navigate = useNavigate();
-
-    
+    const email = localStorage.getItem("email");
+    const dispatch = useDispatch();
+    const userIsLogin = localStorage.getItem("userIsLogin");
+    const navigate = useNavigate();
     const trimmedDescription = description.length > 35 ? `${description.slice(0, 33)}...` : description;
-
-
-
-
-  const sendDetailPage = () => {
+    const addBasket = () => {
+        userIsLogin === "true" ? (
+            dispatch(addToCart({email,id})),
+            alert("sepete eklendi")
+        )
+             : alert("sepete eklemek için lütfen giriş yapın")    
+    }
+    const sendDetailPage = () => {
      navigate(`/product/${id}`)
 }
     return (
@@ -69,7 +75,7 @@ const ProductsPage = ({ product }) => {
                         <Typography>Yorumlar</Typography>
                     </div>
                     <div className='product-action'>
-                        <IconButton>
+                        <IconButton onClick={addBasket}>
                             <AddShoppingCartIcon></AddShoppingCartIcon>
                         </IconButton>
                         <Typography>Sepete Ekle</Typography>

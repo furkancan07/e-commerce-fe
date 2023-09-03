@@ -5,7 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../redux/Reducer/User/UserReducer'
 
 const Login = () => {
-  const { error, username, email, userIsLogin } = useSelector((store) => store.user);
+  const { error, username, email } = useSelector((store) => store.user);
+  const userIsLogin = localStorage.getItem("userIsLogin");
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,7 +29,8 @@ const Login = () => {
     
   }
   useEffect(() => {
-    if (userIsLogin === true) {
+    console.log(userIsLogin);
+    if (userIsLogin === "true") {
       navigate("/");
     }
     else {

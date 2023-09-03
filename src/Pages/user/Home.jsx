@@ -7,13 +7,9 @@ import ProductsPage from '../../compenents/ProductsPage'
 
 
 const Home = () => {
-  const { productList } = useSelector((store) => store.product)
+const { productList } = useSelector((store) => store.product)
 const [category, setCategory] = useState("Teknoloji")
-  
-  
-  
   const dispatch = useDispatch();
-
   const changeCategory = (event) => {
     const name = event.target.name;
     setCategory(name);
