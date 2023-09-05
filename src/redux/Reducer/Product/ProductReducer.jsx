@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createProduct, getCategoryProduct, getSearchProducts } from "../../../api/server";
+import { createProduct, deleteProduct, getAdminProduct, getCategoryProduct, getSearchProducts, updateProduct } from "../../../api/server";
 
 const initialState = {
   productList: [],
@@ -40,15 +40,50 @@ export const addProduct = createAsyncThunk(
              })
             .catch((err) => {
               response = err.response.data;
-              
         })
         return response;
     }
 )
 // ürün güncelleme
+export const upProduct = createAsyncThunk(
+  "admin/updateProduct",
+  async ({ id, body }) => {
+    var response;
+    await updateProduct(id, body).
+      then((res) => { response = res.data }).
+      catch((err) => { response = err.response.data })
+    return response;
+  }
+)
 // ürün silme
-// ürün arama 
+export const removeProduct = createAsyncThunk(
+  "admin/deleteProduct",
+  async (id) => {
+    var response;
+    await deleteProduct(id).then((res) => {
+              response = res.data;
+             })
+            .catch((err) => {
+              response = err.response.data;
+            })
+    return response;
+  }
+)
 
+// admine ait ürünleri getirme
+export const getProductAdmin = createAsyncThunk(
+  "admin/getProduct",
+  async (username) => {
+    var response;
+    await getAdminProduct(username).then((res) => {
+      response = res.data;
+    }).catch((err) => { 
+      response = err.response.data;
+    });
+    return response;
+  }
+)
+// ürün arama
 export const getSearchProductList = createAsyncThunk(
   "product/searchProduct",
   
@@ -111,8 +146,24 @@ title: null,
         console.log(state.status);
         
         
+      })
+      .addCase(getProductAdmin.fulfilled, (state, action) => { 
+        const products = action.payload;
+        state.productList = products.reverse();
+      })
+      .addCase(removeProduct.fulfilled, (state, action) => {
+        console.log(action);
+      })
+      .addCase(upProduct.fulfilled, (state, action) => {
+       state.error = action.payload;
+        console.log(state.error)
+        if (action.payload === 200) {
+          state.status = 200;
+        } else {
+          state.status = "error";
+        }
+        console.log(state.status);
     })
-
   },
 });
 export const { clearError } = productReducer.actions;

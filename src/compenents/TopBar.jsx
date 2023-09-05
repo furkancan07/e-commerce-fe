@@ -1,5 +1,5 @@
 import { Search } from '@mui/icons-material'
-import { AppBar, Box, IconButton, Toolbar,TextField, Button } from '@mui/material'
+import { AppBar, Box, IconButton, Toolbar,TextField, Button, Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -7,11 +7,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSearchProductList } from '../redux/Reducer/Product/ProductReducer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logout } from '../redux/Reducer/User/UserReducer';
+import { aLogout } from '../redux/Reducer/Admin/AdminReducer';
 
 
 
@@ -19,9 +20,13 @@ import { logout } from '../redux/Reducer/User/UserReducer';
 
 const TopBar = () => {
   const [value, setValue] = useState();
-  const { username, isLogin } = useSelector((store) => store.admin);
+  const { isLogin: adminLog } = useSelector((store) => store.admin);
+  const { quantity } = useSelector((store) => store.cart);
+  const username = localStorage.getItem("username");
+  const isLogin = localStorage.getItem("isLogin");
   const { userIsLogin: userlog, email: eposta } = useSelector((store) => store.user);
   const userIsLogin = localStorage.getItem("userIsLogin");
+  const navigate = useNavigate();
   const email = localStorage.getItem("email");
   console.log(userIsLogin + " " + email);
   const dispatch = useDispatch();
@@ -29,17 +34,20 @@ const TopBar = () => {
     event.preventDefault();
     const val = event.target.value;
     setValue(val);
-    
+    navigate("/")
   }
   const logoutUser = () => {
     dispatch(logout()); 
+  }
+  const logoutAdmin=() => {
+    dispatch(aLogout())
   }
   useEffect(() => {
     if (value!="") {
         dispatch(getSearchProductList(value))
      }
   
-  }, [value,userlog])
+  }, [value,userlog,adminLog])
   // admin girişi
   
  
@@ -57,9 +65,12 @@ const TopBar = () => {
       <AppBar position='static'>
         <Toolbar className='toolbar'>
             <Link className='link' to="/"><h1>Admin Panel</h1></Link>
-          
-          <TextField onChange={searchProduct}  id="filled-basic" label="Ara" variant="filled" />
-          <div className='buttons-topbar'>
+         
+              <TextField onChange={searchProduct} id="filled-basic" label="Ara" variant="filled">
+               
+              </TextField>
+               
+              <div className='buttons-topbar'>          
             <Button id="button-topbar" startIcon={<AccountCircleIcon></AccountCircleIcon>}
               >
               <Link className='link' to="/admin-profil"> {username} </Link>
@@ -74,6 +85,11 @@ const TopBar = () => {
            <Button id="button-topbar" startIcon={<AttachMoneyIcon ></AttachMoneyIcon>}
               variant="text">
               <Link className='link' to="/adminProducts"> Ürünlerim </Link>
+            
+                </Button>
+                 <Button  onClick={logoutAdmin} id="button-topbar" startIcon={<LogoutIcon ></LogoutIcon>}
+              variant="text">
+              Çıkıs Yap
             
           </Button>
 
@@ -92,7 +108,9 @@ const TopBar = () => {
         <Toolbar className='toolbar'>
           <Link className='link' to="/"><h1>Rf</h1></Link>
           
-          <TextField onChange={searchProduct}  id="filled-basic" label="Ara" variant="filled" /> 
+                <TextField onChange={searchProduct} id="filled-basic" label="Ara" variant="filled" > 
+                  </TextField>
+               
           <div className='buttons-topbar'>
             <Button id="button-topbar" startIcon={<AccountCircleIcon></AccountCircleIcon>}
               variant="contained">
@@ -101,13 +119,27 @@ const TopBar = () => {
            <Button id="button-topbar" startIcon={<FavoriteIcon color='error'></FavoriteIcon>}
               variant="contained">
               <Link className='link' to="/likes">Beğeniler </Link>
-             
-          </Button>
-           <Button  id="button-topbar" startIcon={<ShoppingCartIcon ></ShoppingCartIcon>}
-              variant="text">
+            
+                  </Button> 
+                  
+ 
+                  <Button id="button-topbar" startIcon={<ShoppingCartIcon >
+                     
+                </ShoppingCartIcon>}
+                    variant="contained">
+                  
               <Link className='link' to="/orders"> Sepet </Link>
             
-                </Button>
+                  </Button>
+                  <Avatar sx={{
+                    backgroundColor : 'black'
+                  }} id='quantity'>{quantity }</Avatar> 
+                  
+                 
+                 
+                  
+                  
+           
                 <Button onClick={logoutUser} id="button-topbar" startIcon={<LogoutIcon></LogoutIcon>}
               variant="text">
               <Link className='link'> Çıkış Yap </Link>

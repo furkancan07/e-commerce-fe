@@ -25,7 +25,6 @@ const CartListPage = ({ cart }) => {
         setIsRemoved(true);
         const timeout = setTimeout(() => {
             dispatch(getCartToList(cart.user.email)); 
-           
         }, 500)
         return () => clearTimeout(timeout);
         
@@ -39,9 +38,12 @@ const CartListPage = ({ cart }) => {
     return (
         <div id='products'>
             <Card id='product-card'>
-                <IconButton onClick={deleteToCart} id='deleteCart'>
+                <div className='deleteDiv'>
+    <IconButton onClick={deleteToCart} id='deleteCart'>
                     <ClearIcon color='warning'></ClearIcon>
                 </IconButton>
+                </div>
+            
                 <CardHeader
                     avatar={<Avatar>{admin.username.charAt(0)}</Avatar>}
                     title={admin.username}

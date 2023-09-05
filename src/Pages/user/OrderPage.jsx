@@ -3,21 +3,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCartToList } from '../../redux/Reducer/Product/CartReducer';
 import CartListPage from '../../compenents/CartListPage';
 import { Button } from '@mui/material';
+import LoginPage from '../auth/user/Login';
+
 
 
 const OrderPage = () => {
   const dispatch = useDispatch();
+  const userIsLogin = localStorage.getItem("userIsLogin");
   const email = localStorage.getItem("email");
-  const { cartProductList,totalPrice } = useSelector((store) => store.cart);
+  const { cartProductList, totalPrice } = useSelector((store) => store.cart);
   useEffect(() => {
     dispatch(getCartToList(email));
-    
   }, [])
   
   
  
   return (
-    <div className='orderDiv'>
+    <div>
+      {
+        userIsLogin ?     <div className='orderDiv'>
+        
  <div className='paymentDiv'>
       {
         cartProductList.map((cart, index) => {
@@ -34,7 +39,12 @@ const OrderPage = () => {
         <Button id='product-button' variant='contained'>Öde</Button>
       </div>
 
+    </div> : <LoginPage></LoginPage>
+      }
+  
     </div>
+
+   
    
   )
 }

@@ -6,15 +6,16 @@ import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButt
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/Reducer/Product/CartReducer';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
-  
   const [product, setProduct] = useState({});
   const { title, description, admin, image, category, price } = product;
-  
+  const email = localStorage.getItem("email");
+  const userIsLogin = localStorage.getItem("userIsLogin");
+  const dispatch = useDispatch();
   const getProductDetail=async() => {
     try {
       var response = await getProduct(id);
@@ -25,6 +26,13 @@ const ProductDetailPage = () => {
     } catch (error) {
       throw error;
     }
+  }
+  const addBasket=() => {
+     userIsLogin === "true" ? (
+            dispatch(addToCart({email,id})),
+            alert("sepete eklendi")
+        )
+             : alert("sepete eklemek için lütfen giriş yapın")   
   }
   useEffect(() => {
     getProductDetail();
@@ -37,7 +45,6 @@ const ProductDetailPage = () => {
             avatar={<Avatar>{admin?.username.charAt(0)}</Avatar>}
           title={admin?.username}    
                 />
-
                 {image && image.includes('image') ?
                     <CardMedia
                         component="img"
@@ -56,12 +63,9 @@ const ProductDetailPage = () => {
           <Typography variant='h5'>{title}</Typography>
           <Typography variant='body2'>{category?.name}</Typography>
                     <br />
-           
             <pre>
               <Typography variant='h6'>{description}</Typography>
               </pre>
-                       
-                    
                     <br />
                     <Typography id='price' variant='body1'>{price} TL</Typography>
                 </CardContent>
@@ -79,7 +83,7 @@ const ProductDetailPage = () => {
                         <Typography>Yorumlar</Typography>
                     </div>
                     <div className='product-action'>
-                        <IconButton>
+                        <IconButton onClick={addBasket}>
                             <AddShoppingCartIcon></AddShoppingCartIcon>
                         </IconButton>
                         <Typography>Sepete Ekle</Typography>
@@ -87,11 +91,7 @@ const ProductDetailPage = () => {
                 </CardActions>
             </Card> : <></>
       }
-    
-    
-        
     </div>
   )
 }
-
 export default ProductDetailPage

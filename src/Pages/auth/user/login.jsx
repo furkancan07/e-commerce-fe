@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../redux/Reducer/User/UserReducer'
 
-const Login = () => {
+const LoginPage = () => {
   const { error, username, email } = useSelector((store) => store.user);
   const userIsLogin = localStorage.getItem("userIsLogin");
   const [disabled, setDisabled] = useState(false);
@@ -72,4 +72,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginPage

@@ -1,20 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { adminLogin, createProduct } from "../../../api/server";
 
-
-
-
-
 const initialState = {
     username: null,
-
     isLogin : false,
     error: {
         
  username: null,
         password : null
-        
-       
     },
 
 }
@@ -49,8 +42,9 @@ export const adminReducer = createSlice({
                 }
                 
         },
-        logout: (state) => {
+        aLogout: (state) => {
             state.isLogin = false;
+            localStorage.removeItem("isLogin");
         }
     },
     extraReducers: (builder) => {
@@ -58,10 +52,12 @@ export const adminReducer = createSlice({
         .addCase(aLogin.fulfilled, (state, action) => {
              
             state.username = action.meta.arg.username;
+            localStorage.setItem("username", state.username);
             state.error = action.payload;
             const err = state.error;
             if (state.error == 200) {
                 state.isLogin = true;
+                localStorage.setItem("isLogin", "true");
             }
             else {
                 state.isLogin = false;
@@ -73,5 +69,5 @@ export const adminReducer = createSlice({
        
     }
 });
-export const { clearError,logout } = adminReducer.actions; 
+export const { clearError,aLogout } = adminReducer.actions; 
 export default adminReducer.reducer;

@@ -7,7 +7,8 @@ import { addProduct, clearError } from '../../redux/Reducer/Product/ProductReduc
 
 
 const ProductAdd = () => {
-    const { username, isLogin } = useSelector((store) => store.admin);
+  const isLogin = localStorage.getItem("isLogin");
+  const username = localStorage.getItem("username");
     const { error, status } = useSelector((store) => store.product)
   const [disabled, setDisabled] = useState(false);
   const [selectedImage, setImage] = useState();

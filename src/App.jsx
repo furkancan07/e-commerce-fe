@@ -21,7 +21,7 @@ import UserProfilPage from './Pages/user/UserProfilPage'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>

@@ -2,12 +2,16 @@
     background-color: white;
     border-radius: 25px;
     text-decoration: none;
-    
 }
 #button-topbar{
     background-color: white;
     color: black;
     margin-left: 12px;
+   
+}
+.buttons-topbar{
+        display: flex;
+            flex-wrap: wrap;
 }
 
 .toolbar{
@@ -116,6 +120,14 @@ width: 80%;
 .paymentDiv{
     margin-top: 5%;
 }
+#quantity{
+    height: 20px;
+    width: 20px;
+}
+.deleteDiv{
+    text-align: end;
+}
+
 
 
 

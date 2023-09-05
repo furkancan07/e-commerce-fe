@@ -62,11 +62,13 @@ export const cartReducer = createSlice({
         })
             .addCase(getCartToList.fulfilled, (state, action) => {
                 state.cartProductList = action.payload;
-                state.quantity = state.cartProductList.length;
+                
                 state.totalPrice = 0;
                   state.cartProductList.forEach((cart) => {
                 state.totalPrice += cart.product.price;
-              }) 
+                  }) 
+                state.quantity = state.cartProductList.length;
+                
                 console.log(state.cartProductList);
             })
            
