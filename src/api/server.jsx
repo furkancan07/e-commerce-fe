@@ -64,7 +64,7 @@ export const getLikeList = async (email) => {
 //* Yorum işlemleri
 // yorum atma
 export const addComment = async (email,productId,body) => {
-    var res=await axios.post(url+"addComment/"+email+productId,body);
+    var res=await axios.post(url+"addComment/"+email+"/"+productId,body);
     return res;
 }
 // bir ürüne ait yorumları getirme
@@ -187,6 +187,11 @@ export const userLogin = async (creds) => {
 // user şifremi unuttum
 export const forgotPassword = async (body) => {
     var res = await axios.post(url + "forgot", body);
+    return res;
+}
+// user bilgilerini getirme
+export const getUser = async (email) => {
+    var res = await axios.get(url + "getUser/" + email);
     return res;
 }
 

@@ -5,6 +5,7 @@ const initialState = {
     email: null,
     username : null,
     userIsLogin: false,
+    status: null,
     error: {
         email: null,
         password : null,
@@ -45,7 +46,10 @@ export const userReducer = createSlice({
         logout: (state) => {
             state.userIsLogin = false;
             localStorage.removeItem("userIsLogin");
-      }  
+        }  ,
+        clearError: (state) => {
+            state.error = [];
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
@@ -60,8 +64,18 @@ export const userReducer = createSlice({
             } else {
                 state.userIsLogin = false;
             }
+        }).addCase(userCreate.fulfilled, (state, action) => {
+         state.email = action.meta.arg.email;
+            state.error = action.payload;
+            console.log(state.error);
+               if (state.error == 200) {
+                   state.status = 200;
+            } else {
+                   state.status = 404;
+            }
+            console.log(state.status);
     })
 }    
 });
-export const { logout } = userReducer.actions;
+export const { logout,clearError } = userReducer.actions;
 export default userReducer.reducer;

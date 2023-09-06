@@ -45,7 +45,7 @@ const ProductsPage = ({ product }) => {
                             objectFit: 'contain',
                         }}
                     /> : image && image.includes('video') ?
-                        <video height={217} width='100%' controls>
+                        <video height={280} width='100%' controls>
                             <source src={image} type="video/mp4" />
                         </video> : null
                 }  
@@ -68,12 +68,7 @@ const ProductsPage = ({ product }) => {
                         </IconButton>
                         <Typography>Beğen</Typography>
                     </div>
-                    <div className='product-action'>
-                        <IconButton>
-                            <CommentIcon></CommentIcon>
-                        </IconButton>
-                        <Typography>Yorumlar</Typography>
-                    </div>
+                    
                     <div className='product-action'>
                         <IconButton onClick={addBasket}>
                             <AddShoppingCartIcon></AddShoppingCartIcon>

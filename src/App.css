@@ -127,6 +127,24 @@ width: 80%;
 .deleteDiv{
     text-align: end;
 }
+#content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#profil{
+    margin: 5%;
+}
+#center{
+    text-align: center;
+}
+#comment-send{
+    margin: 3%;
+}
+#grid-comment{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 
 

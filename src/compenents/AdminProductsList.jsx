@@ -60,15 +60,9 @@ const AdminProductsList = ({ product }) => {
             alert("Ürün Güncellendi");
             setEdit(false);
         }
-
-        
     }
-    
-    
     return (
-        <div id='products'>
-           
-        
+        <div id='products'>   
  <Card id='product-card'>
                 <CardHeader
                     avatar={<Avatar>{admin.username.charAt(0)}</Avatar>}
@@ -165,5 +159,4 @@ const AdminProductsList = ({ product }) => {
         </div>
     )
 }
-
 export default AdminProductsList;

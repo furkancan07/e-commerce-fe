@@ -2,19 +2,29 @@ import React, { useEffect } from 'react'
 import { getProduct } from '../../api/server'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react';
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, TextField, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/Reducer/Product/CartReducer';
+import { createComment, getComments } from '../../redux/Reducer/Product/CommentReducer';
+import store from '../../redux/store';
+import CommentListPage from '../../compenents/CommentListPage';
+import { Send } from '@mui/icons-material';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  const [disabled, setDisabled] = useState(true);
   const [product, setProduct] = useState({});
   const { title, description, admin, image, category, price } = product;
   const email = localStorage.getItem("email");
   const userIsLogin = localStorage.getItem("userIsLogin");
+  const { commentList,status } = useSelector((store) => store.comment);
+  const [isComment, setIsComment] = useState(true);
+  const [body, setBody] = useState({
+    content :null,
+  })
   const dispatch = useDispatch();
   const getProductDetail=async() => {
     try {
@@ -27,6 +37,32 @@ const ProductDetailPage = () => {
       throw error;
     }
   }
+  const inputChange = (event) => {
+    setDisabled(false);
+    const name = event.target.name;
+    const value = event.target.value;
+    setBody({ ...body, [name]: value })
+    if (value === "") {
+      setDisabled(true)
+    }
+  }
+  const commentAdd=() => {
+    dispatch(createComment({ email, id, body }))
+    setTimeout(() => {
+     alert("Yorum Eklendi")
+    window.location.reload(); // Reload the page
+  }, 500);
+    
+    
+  }
+  const offComment=() => {
+    setIsComment(false);
+  }
+  const onComment=() => {
+    setIsComment(true);
+    dispatch(getComments(id))
+   
+  }
   const addBasket=() => {
      userIsLogin === "true" ? (
             dispatch(addToCart({email,id})),
@@ -36,11 +72,14 @@ const ProductDetailPage = () => {
   }
   useEffect(() => {
     getProductDetail();
-  },[])
+    dispatch(getComments(id))
+  }, [])
+
+  
   return (
     <div>
          {
-        product !=null ?   <Card >
+         <Card >
                 <CardHeader
             avatar={<Avatar>{admin?.username.charAt(0)}</Avatar>}
           title={admin?.username}    
@@ -55,7 +94,7 @@ const ProductDetailPage = () => {
                             objectFit: 'contain',
                         }}
                     /> : image && image.includes('video') ?
-                        <video height={217} width='100%' controls>
+                        <video height={700} width='100%' controls>
                             <source src={image} type="video/mp4" />
                         </video> : null
                 }
@@ -68,8 +107,8 @@ const ProductDetailPage = () => {
               </pre>
                     <br />
                     <Typography id='price' variant='body1'>{price} TL</Typography>
-                </CardContent>
-                <CardActions id='action'>
+          </CardContent>
+          {userIsLogin ? <CardActions id='action'>
                     <div className='product-action'>
                         <IconButton>
                             <FavoriteIcon color='warning'></FavoriteIcon>
@@ -77,7 +116,7 @@ const ProductDetailPage = () => {
                         <Typography>Beğen</Typography>
                     </div>
                     <div className='product-action'>
-                        <IconButton>
+                        <IconButton onClick={isComment ? offComment : onComment}>
                             <CommentIcon></CommentIcon>
                         </IconButton>
                         <Typography>Yorumlar</Typography>
@@ -88,9 +127,37 @@ const ProductDetailPage = () => {
                         </IconButton>
                         <Typography>Sepete Ekle</Typography>
                     </div>
-                </CardActions>
-            </Card> : <></>
+                </CardActions>: <></> }
+                
+        </Card> 
       }
+      {
+        userIsLogin ? <div>
+{isComment ? <div>
+        <Card id='comment-send'>
+          <Grid  id='grid-comment'>  
+            <TextField name='content' onChange={inputChange} sx={{
+              width: '70%',
+              margin: "3%"
+              
+            }} label="Yorum Gönder"></TextField>
+            <Button disabled={disabled}
+              onClick={commentAdd}
+              sx={{
+  color :"black"
+}}
+startIcon={<Send></Send>}></Button>
+          </Grid>
+          <div>{commentList.map((comment, index) => {
+            return <CommentListPage comment={comment} key={index}></CommentListPage>
+          })}</div>
+        </Card>
+        
+      </div> : <></>}
+      </div> : <></>
+      }
+      
+      
     </div>
   )
 }

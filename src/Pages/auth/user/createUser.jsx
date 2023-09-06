@@ -1,30 +1,59 @@
 import { TextField ,Button} from '@mui/material'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { clearError, userCreate } from '../../../redux/Reducer/User/UserReducer'
 
-const CreateUser = () => {
+const CreateUserPage = () => {
+    const { error, status } = useSelector((store) => store.user);
+    const navigate = useNavigate();
+    const [body, setBody] = useState({
+        username: null,
+        email: null,
+        password : null,
+    })
+    const dispatch = useDispatch();
+    const inputChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setBody({ ...body, [name]: value });
+        dispatch(clearError());
+    }
+    const crtUser=() => {
+        dispatch(userCreate(body));
+        if (status === 200) {
+            alert("Başari ile kayıt olundu");
+            navigate("/login");
+        }
+    }
   return (
     <div>
-        
           <form className='login-form'>
               <h1>Kayıt Ol</h1>
               <div  className='inputDiv'>
-                  <TextField  className='login-input' placeholder='Kullanici Adi giriniz *' name='Kullanici Adi'></TextField>
+                  <TextField  onChange={inputChange} className='login-input' placeholder='Kullanici Adi giriniz *' name='username'></TextField>
               </div>
+               <div className="invalid-feedback">
+          {error?.validationErrors?.username}
+        </div>
               <div className='inputDiv'>
-                  <TextField type='email' className='login-input' placeholder='Email Adresi*' name='email'></TextField>
+                  <TextField onChange={inputChange} type='email' className='login-input' placeholder='Email Adresi*' name='email'></TextField>
               </div>
+               <div className="invalid-feedback">
+          {error?.validationErrors?.email}
+        </div>
               <div className='inputDiv'>
-                  <TextField type='password' className='login-input' placeholder='Şifre*' name='şifre'></TextField>
+                  <TextField onChange={inputChange} type='password' className='login-input' placeholder='Şifre*' name='password'></TextField>
               </div>
-              <Button id='login-button' size='large' variant='contained'>
-                  <Link className='link-create'  to="/login" >Kayıt</Link>
+               <div className="invalid-feedback">
+          {error?.validationErrors?.password}
+        </div>
+              <Button onClick={crtUser} id='login-button' size='large' variant='contained'>
+                  Kayıt
               </Button>
-             
-              
           </form>
     </div>
   )
 }
 
-export default CreateUser
+export default CreateUserPage

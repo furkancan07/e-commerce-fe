@@ -71,11 +71,7 @@ const TopBar = () => {
               </TextField>
                
               <div className='buttons-topbar'>          
-            <Button id="button-topbar" startIcon={<AccountCircleIcon></AccountCircleIcon>}
-              >
-              <Link className='link' to="/admin-profil"> {username} </Link>
-           
-              </Button>
+            
                  <Button id="button-topbar" startIcon={<AddIcon ></AddIcon>}
               variant="text">
               <Link className='link' to="/productAdd"> Ürün Ekle </Link>
