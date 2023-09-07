@@ -12,6 +12,7 @@ import { createComment, getComments } from '../../redux/Reducer/Product/CommentR
 import store from '../../redux/store';
 import CommentListPage from '../../compenents/CommentListPage';
 import { Send } from '@mui/icons-material';
+import { addLike, removeLike } from '../../redux/Reducer/Product/LikeReducer';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -25,6 +26,9 @@ const ProductDetailPage = () => {
   const [body, setBody] = useState({
     content :null,
   })
+    const [isLike, setisLike] = useState(()=>{
+         return localStorage.getItem(`isLike_${id+email}`) || 'false';
+    })
   const dispatch = useDispatch();
   const getProductDetail=async() => {
     try {
@@ -63,6 +67,9 @@ const ProductDetailPage = () => {
     dispatch(getComments(id))
    
   }
+    const alertLogin=() => {
+        alert("Beğenmek için lütfen giriş yapın");
+    }
   const addBasket=() => {
      userIsLogin === "true" ? (
             dispatch(addToCart({email,id})),
@@ -70,6 +77,17 @@ const ProductDetailPage = () => {
         )
              : alert("sepete eklemek için lütfen giriş yapın")   
   }
+  const onLike = () => {
+        setisLike("true")
+        localStorage.setItem(`isLike_${id+email}`, 'true')
+        dispatch(addLike({ id, email }));
+        
+    }
+    const offLike = () => {
+      setisLike("false");
+        localStorage.setItem(`isLike_${id+email}`, 'false')
+        dispatch(removeLike(id));
+    }
   useEffect(() => {
     getProductDetail();
     dispatch(getComments(id))
@@ -109,9 +127,9 @@ const ProductDetailPage = () => {
                     <Typography id='price' variant='body1'>{price} TL</Typography>
           </CardContent>
           {userIsLogin ? <CardActions id='action'>
-                    <div className='product-action'>
-                        <IconButton>
-                            <FavoriteIcon color='warning'></FavoriteIcon>
+                      <div className='product-action'>
+                        <IconButton onClick={userIsLogin ?  isLike==="true" ? offLike : onLike : alertLogin}>
+                            <FavoriteIcon color={isLike==="true" ? "warning" : "action"}></FavoriteIcon>
                         </IconButton>
                         <Typography>Beğen</Typography>
                     </div>

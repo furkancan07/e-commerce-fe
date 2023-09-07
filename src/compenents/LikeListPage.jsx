@@ -47,8 +47,6 @@ const CartListPage = ({ like }) => {
     const handleSnackbarClose = () => {
         setIsRemoved(false);
     }
-   
-
     return (
         <div id='products'>
             <Card id='product-card'>

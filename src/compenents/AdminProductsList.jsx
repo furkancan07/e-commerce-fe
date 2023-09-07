@@ -154,7 +154,7 @@ const AdminProductsList = ({ product }) => {
                 open={isRemoved}
                 autoHideDuration={3000}
                 onClose={handleSnackbarClose}
-                message="Ürün sepetten kaldırıldı"
+                message="Ürün  Kaldırıldı"
             />
         </div>
     )
