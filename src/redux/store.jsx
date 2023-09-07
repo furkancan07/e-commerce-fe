@@ -4,6 +4,7 @@ import AdminReducer, { adminReducer } from "./Reducer/Admin/AdminReducer";
 import UserReducer from "./Reducer/User/UserReducer";
 import CartReducer from "./Reducer/Product/CartReducer";
 import CommentReducer from "./Reducer/Product/CommentReducer";
+import LikeReducer from "./Reducer/Product/LikeReducer";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
         admin: AdminReducer,
         user: UserReducer,
         cart: CartReducer,
-        comment : CommentReducer,
+        comment: CommentReducer,
+        like : LikeReducer,
     }
 });
 export default store;

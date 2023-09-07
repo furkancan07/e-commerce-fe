@@ -37,10 +37,12 @@ const TopBar = () => {
     navigate("/")
   }
   const logoutUser = () => {
-    dispatch(logout()); 
+    dispatch(logout());
+    navigate("/login")
   }
   const logoutAdmin=() => {
     dispatch(aLogout())
+    navigate("/admin-login")
   }
   useEffect(() => {
     if (value!="") {

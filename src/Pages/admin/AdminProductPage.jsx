@@ -5,6 +5,7 @@ import LoginPage from '../auth/user/Login';
 import ProductsPage from '../../compenents/ProductsPage';
 import AdminProductsList from '../../compenents/AdminProductsList';
 import Loading from '../../compenents/Loading';
+import AdminSignUp from '../auth/admin/AdminSignUp';
 
 
 
@@ -32,7 +33,7 @@ const AdminProductPage = () => {
             }) 
           }
           
-        </div> : <LoginPage></LoginPage>
+        </div> : <AdminSignUp/>
       }
       
     </div>

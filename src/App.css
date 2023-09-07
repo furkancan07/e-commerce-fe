@@ -145,6 +145,9 @@ width: 80%;
     display: flex;
     flex-wrap: wrap;
 }
+.action-basket{
+    margin-left: 40%;
+}
 
 
 

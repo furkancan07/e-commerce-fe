@@ -50,8 +50,8 @@ export const plusLike = async (productId,email) => {
     return res;
 }
 // like geri alma
-export const minusLike = async (productId,email) => {
-    var res=await axios.post(url+"minusLike/"+productId+"/"+email);;
+export const minusLike = async (productId) => {
+    var res=await axios.post(url+"minusLike/"+productId);;
     return res;
 }
 // bir kullanıcının like attığı ürünleri getirme

@@ -47,13 +47,13 @@ const LoginPage = () => {
           <form className='login-form'>
                 <h1>Giriş Yap</h1>
               <div className='inputDiv'>
-                  <TextField onChange={inputChange} className='login-input' placeholder='Email Adresi*' name='email'></TextField>
+          <TextField  label={"Email Adresi"}  onChange={inputChange} className='login-input' placeholder='Email Adresi*' name='email'></TextField>
         </div>
         <div className="invalid-feedback">
           {error?.validationErrors?.email}
         </div>
               <div className='inputDiv'>
-                  <TextField onChange={inputChange} type='password' className='login-input' placeholder='Şifre*' name='password'></TextField>
+                  <TextField label={"Şifre"} onChange={inputChange} type='password' className='login-input' placeholder='Şifre*' name='password'></TextField>
         </div>
          <div className="invalid-feedback">
           {error?.validationErrors?.password}

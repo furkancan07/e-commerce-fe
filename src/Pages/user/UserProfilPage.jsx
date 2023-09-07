@@ -10,7 +10,7 @@ import { getUser } from '../../api/server';
 const UserProfilPage = () => {
   const userIsLogin = localStorage.getItem("userIsLogin");
 
-  const { email } = useParams();
+   const { email } = useParams();
   const [user, setUser] = useState({
     id: null,
     username: null,
@@ -23,7 +23,9 @@ const UserProfilPage = () => {
     await getUser(email).then((res) => {
       setUser(res.data);
       return res.data;
-    }).catch((err)=>{})
+    }).catch((err) => {
+      throw err;
+    })
   }
   useEffect(() => {
     userGet();

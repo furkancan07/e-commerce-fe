@@ -34,7 +34,7 @@ const AdminSignUp = () => {
  
   useEffect(() => {
     if (isLogin === true) {
-      navigate('/admin-panel');
+      navigate('/productAdd');
     } else {
       const timeout = setTimeout(() => {
         setDisabled(false);

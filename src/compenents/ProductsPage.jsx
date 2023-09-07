@@ -1,5 +1,5 @@
 import { Alert, Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -7,10 +7,14 @@ import {Button} from '@mui/material'
 import { useBeforeUnload, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/Reducer/Product/CartReducer';
+import { addLike, removeLike } from '../redux/Reducer/Product/LikeReducer';
 
 const ProductsPage = ({ product }) => {
     const { id, admin, title, image, description, price } = product;
     const email = localStorage.getItem("email");
+     const [isLike, setisLike] = useState(()=>{
+         return localStorage.getItem(`isLike_${id+email}`) || 'false';
+    })
     const dispatch = useDispatch();
     const userIsLogin = localStorage.getItem("userIsLogin");
     const navigate = useNavigate();
@@ -21,6 +25,20 @@ const ProductsPage = ({ product }) => {
             alert("sepete eklendi")
         )
              : alert("sepete eklemek için lütfen giriş yapın")    
+    }
+    const onLike=() => {
+        setisLike("true")
+        localStorage.setItem(`isLike_${id+email}`, 'true')
+        dispatch(addLike({ id, email }));
+        
+    }
+    const offLike = () => {
+        setisLike('false')
+        localStorage.setItem(`isLike_${id+email}`, 'false')
+        dispatch(removeLike(id));
+    }
+    const alertLogin=() => {
+        alert("Beğenmek için lütfen giriş yapın");
     }
     const sendDetailPage = () => {
      navigate(`/product/${id}`)
@@ -63,8 +81,8 @@ const ProductsPage = ({ product }) => {
                 </CardContent>
                 <CardActions id='action'>
                     <div className='product-action'>
-                        <IconButton>
-                            <FavoriteIcon color='warning'></FavoriteIcon>
+                        <IconButton onClick={userIsLogin ?  localStorage.getItem( `isLike_${id+email}`)==="true" ? offLike : onLike : alertLogin}>
+                            <FavoriteIcon color={localStorage.getItem(`isLike_${id+email}`)==="true" ? "warning" : "action"}></FavoriteIcon>
                         </IconButton>
                         <Typography>Beğen</Typography>
                     </div>
