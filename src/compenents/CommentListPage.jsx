@@ -3,17 +3,18 @@ import { grey } from '@mui/material/colors'
 import React from 'react'
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch } from 'react-redux';
-import { deleteToComment } from '../redux/Reducer/Product/CommentReducer';
+import { deleteToComment, getComments } from '../redux/Reducer/Product/CommentReducer';
 
-const CommentListPage = ({ comment }) => {
+const CommentListPage = ({ comment,productId }) => {
   const { id, content, user } = comment
   const dispatch = useDispatch();
   const email = localStorage.getItem("email");
   const delComment=() => {
     dispatch(deleteToComment(id));
      setTimeout(() => {
-       window.location.reload();
-       alert("Yorum Silindi");   // Reload the page
+       
+       alert("Yorum Silindi");
+       dispatch(getComments(productId))// Reload the page
   }, 500);
   }
 

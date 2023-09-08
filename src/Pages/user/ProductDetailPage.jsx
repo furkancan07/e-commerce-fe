@@ -173,7 +173,7 @@ const ProductDetailPage = () => {
 startIcon={<Send></Send>}></Button>
           </Grid>
           <div>{commentList.map((comment, index) => {
-            return <CommentListPage comment={comment} key={index}></CommentListPage>
+            return <CommentListPage productId={id} comment={comment} key={index}></CommentListPage>
           })}</div>
         </Card>
         
