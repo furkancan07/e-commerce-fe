@@ -46,6 +46,7 @@ export const userReducer = createSlice({
         logout: (state) => {
             state.userIsLogin = false;
             localStorage.removeItem("userIsLogin");
+            localStorage.removeItem("email");
         }  ,
         clearError: (state) => {
             state.error = [];
