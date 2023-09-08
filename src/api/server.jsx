@@ -1,7 +1,7 @@
 import axios from "axios";
 
-var url = "http://localhost:8080/api/";
-
+//var url = "http://localhost:8080/api/";
+var url = "https://naive-order-production.up.railway.app/api/";
 //* product işlemleri
 
 // ürün ekleme
