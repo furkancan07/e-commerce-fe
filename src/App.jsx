@@ -17,9 +17,10 @@ import ProductAdd from './Pages/admin/ProductAdd'
 import AdminProductPage from './Pages/admin/AdminProductPage'
 
 import ProductDetailPage from './Pages/user/ProductDetailPage'
-import Login from './Pages/auth/user/Login'
+
 import UserProfilPage from './Pages/user/UserProfilPage'
 import CreateUserPage from './Pages/auth/user/CreateUser'
+import LoginPage from './Pages/auth/user/Login'
 
 
 
@@ -32,7 +33,7 @@ function App() {
       
   <Routes>
         <Route path='/' element={<Home></Home>}></Route>
-        <Route path='/login' element={<Login/>}></Route>
+        <Route path='/login' element={<LoginPage/>}></Route>
         <Route path='/likes' element={<LİkePage></LİkePage>}></Route>
         <Route path='/orders' element={<OrderPage></OrderPage>}></Route>
         <Route path='/admin-login' element={<AdminSignUp></AdminSignUp>}></Route>
