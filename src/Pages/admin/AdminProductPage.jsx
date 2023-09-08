@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductAdmin } from '../../redux/Reducer/Product/ProductReducer';
-import LoginPage from '../auth/user/Login';
+import LoginPage from '../auth/user/LoginPage';
 import ProductsPage from '../../compenents/ProductsPage';
 import AdminProductsList from '../../compenents/AdminProductsList';
 import Loading from '../../compenents/Loading';

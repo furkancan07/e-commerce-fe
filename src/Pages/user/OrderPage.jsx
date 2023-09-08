@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCartToList } from '../../redux/Reducer/Product/CartReducer';
 import CartListPage from '../../compenents/CartListPage';
 import { Button } from '@mui/material';
-import LoginPage from '../auth/user/Login';
+import LoginPage from '../auth/user/LoginPage';
 
 
 

@@ -19,8 +19,8 @@ import AdminProductPage from './Pages/admin/AdminProductPage'
 import ProductDetailPage from './Pages/user/ProductDetailPage'
 
 import UserProfilPage from './Pages/user/UserProfilPage'
-import CreateUserPage from './Pages/auth/user/CreateUser'
-import LoginPage from './Pages/auth/user/Login'
+import CreateUserPage from './Pages/auth/user/CreateUserPage'
+import LoginPage from './Pages/auth/user/LoginPage'
 
 
 

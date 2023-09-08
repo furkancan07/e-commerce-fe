@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import Login from '../auth/user/Login';
+import Login from '../auth/user/LoginPage';
 import {Button, Card, CardActions, CardContent, Container, IconButton, Typography } from '@mui/material';
 ;
 import { Link, useParams } from 'react-router-dom';
