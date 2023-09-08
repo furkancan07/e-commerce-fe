@@ -32,7 +32,7 @@ const [category, setCategory] = useState("Teknoloji")
         <Button onClick={changeCategory} name='Spor' variant='text'>Spor</Button>
         <Button onClick={changeCategory} name='Giyim' variant='text'>Giyim</Button>
         <Button onClick={changeCategory} name='Kozmetik' variant='text'>Kozmetik</Button>
-        <Button onClick={changeCategory} name='Cocuk' variant='text'>Çocuk</Button>
+        <Button onClick={changeCategory} name='Çocuk' variant='text'>Çocuk</Button>
         <Button onClick={changeCategory} name='Market' variant='text'>SuperMarket</Button>
       </div>
       <div id='products'>
