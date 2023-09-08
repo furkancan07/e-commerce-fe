@@ -43,7 +43,9 @@ Backend tarafında daha detaylı gösterildi ama örnek kullanım için
 
 **Frontend:** React, Redux, Vite, MaterialUI,Axios,Router
 
-**Sunucu:** Spring Boot, MySQl,Java Mail Sender
+**Backend:** Spring Boot
+
+**DataBase** MySql
 
 **Yayınlama** Vercel,Railway
 
