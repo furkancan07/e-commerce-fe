@@ -25,6 +25,7 @@ const AdminProductsList = ({ product }) => {
     const [edit, setEdit] = useState(false);
      const [isRemoved, setIsRemoved] = useState(false);
     const trimmedDescription = description.length > 35 ? `${description.slice(0, 33)}...` : description;
+    const trimmedTitle = description.length > 30 ? `${title.slice(0, 30)}...` : title;
    const username = localStorage.getItem("username");
     const delProduct = () => {
         setIsRemoved(true);
@@ -118,7 +119,7 @@ const AdminProductsList = ({ product }) => {
 </Button>
           
                 <CardContent>
-                    <Typography variant='h5'>{title}</Typography>
+                    <Typography variant='h5'>{trimmedTitle}</Typography>
             <br />
             <Typography variant='h6'>
 {trimmedDescription}

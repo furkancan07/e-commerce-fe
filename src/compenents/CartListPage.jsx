@@ -12,7 +12,7 @@ const CartListPage = ({ cart }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const trimmedDescription = description.length > 35 ? `${description.slice(0, 33)}...` : description;
-
+const trimmedTitle = description.length > 30 ? `${title.slice(0, 30)}...` : title;
     const [isRemoved, setIsRemoved] = useState(false);
 
     const sendDetailPage = () => {
@@ -65,7 +65,7 @@ const CartListPage = ({ cart }) => {
                     }
                 </Button>
                 <CardContent>
-                    <Typography variant='h5'>{title}</Typography>
+                    <Typography variant='h5'>{trimmedTitle}</Typography>
                     <br />
                     <Typography variant='h6'>
                         {trimmedDescription}
