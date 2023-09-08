@@ -16,6 +16,7 @@ import { addLike, removeLike } from '../../redux/Reducer/Product/LikeReducer';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  
   const [disabled, setDisabled] = useState(true);
   const [product, setProduct] = useState({});
   const { title, description, admin, image, category, price } = product;
@@ -44,18 +45,23 @@ const ProductDetailPage = () => {
   const inputChange = (event) => {
     setDisabled(false);
     const name = event.target.name;
-    const value = event.target.value;
+    const value =event.target.value;
     setBody({ ...body, [name]: value })
     if (value === "") {
       setDisabled(true)
     }
+    
   }
   const commentAdd=() => {
     dispatch(createComment({ email, id, body }))
     setTimeout(() => {
-     alert("Yorum Eklendi")
-    window.location.reload(); // Reload the page
-  }, 500);
+      alert("Yorum Eklendi")
+      dispatch(getComments(id))
+     
+
+    //window.location.reload(); 
+    }, 500);
+   
     
     
   }
