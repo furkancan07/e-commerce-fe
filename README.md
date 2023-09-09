@@ -33,7 +33,9 @@ Backend tarafında daha detaylı gösterildi ama örnek kullanım için
 ## Sitenin Linki
 [Siteyi](https://rf-ecommerce.vercel.app) canlı görmek için tıkla.
 
-  
+## Video
+[Video](https://www.youtube.com/watch?v=Oip3QkVyclE&list=PLoFXp7qbir3fKTMj84uEk7S9nk1A3g6NK)
+
 ## İletişim
 
 İletişim için canfurkan903@gmail.com adresine e-posta gönderin 
