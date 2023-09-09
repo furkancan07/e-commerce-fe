@@ -23,7 +23,7 @@ basit bir e ticaret uygulaması
 
 
 ## Backend Tarafı
-[backend](https://github.com/furkancan2107/springboot-socalmedia-app-backend) kodları için tıkla.
+[backend](https://github.com/furkancan2107/springboot-e-commerce) kodları için tıkla.
   
 ## API Kullanımı
 
