@@ -31,7 +31,9 @@ Backend tarafında daha detaylı gösterildi ama örnek kullanım için
 [server](https://github.com/furkancan2107/e-commerce-fe/blob/main/src/api/server.jsx) kısmına bakabilirsiniz 
 
 ## Sitenin Linki
-[Siteyi](https://rf-ecommerce.vercel.app) canlı görmek için tıkla.
+[Siteyi](https://rf-ecommerce.vercel.app) canlı görmek için tıkla. 
+ 
+ !!!!BACKEND TARAFINI YAYINLADIĞIM SİTENİN DENEME SÜRÜMÜ BİTTİĞİ İÇİN SİTE ÇALIŞMIYOR!!!!
 
 ## Video
 [Video](https://www.youtube.com/watch?v=Oip3QkVyclE&list=PLoFXp7qbir3fKTMj84uEk7S9nk1A3g6NK)
